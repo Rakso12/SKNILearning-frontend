@@ -1,11 +1,39 @@
-import { Link } from "@tanstack/react-location";
+import { Link, useNavigate } from "@tanstack/react-location";
 import { useState } from "react";
 import logo from "../../Resources/Images/logoSKNILearning.png";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+
+const getUser = () => fetch(`http://oki.com:8000/api/user`).then(response => response.json());
 
 function Navbar() {
-  const [isLogged, setIsLogged] = useState(false);
+    const queryClient = useQueryClient();
+    const navigate = useNavigate();
 
-  return (
+    async function logOut(){
+        const requestOptions = {
+            method: 'POST',
+            headers: { Accept: 'application/json','Content-Type': 'application/json' },
+            credentials: 'include'
+        };
+        
+        const response = await fetch('http://oki.com:8000/api/logout', requestOptions)
+        const data = await response.json();
+        
+        if(response.ok){
+            console.log("Response: OK - User Logout", response);
+
+            const data = queryClient.getQueryData(["course.popular"]);
+            queryClient.clear();
+            queryClient.setQueryData(["course.popular"], () => data);
+
+            navigate({ to: '/', replace: true })
+        }
+        console.log(data);
+    }
+
+    const { data: userAuth, error, isLoading, isSuccess } = useQuery(["user"], getUser);
+
+    return (
     <div>
         <nav className="bg-colora text-white border-b-2 border-colorf">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,7 +57,7 @@ function Navbar() {
                         <input type="search" className="mx-4 block pl-4 w-72 h-11 text-sm text-colorf bg-colord rounded-md focus:ring-1 focus:outline-none focus:ring-colore" placeholder="Search courses or path..."></input>
                         
                         {
-                            isLogged && 
+                            isSuccess && 
                             <div className="flex items-center p-4">
                                 <Link to="/">
                                     <span className="p-10">
@@ -39,13 +67,15 @@ function Navbar() {
                                     </span>
                                 </Link>
 
-                                <Link to="/">
-                                    <img className="inline object-cover w-11 h-11 mr-2 rounded-full" src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Avatar"/>
+                                <Link to="/logout">
+                                    <div onClick={logOut} className="bg-colord hover:bg-colore text-white font-bold py-2 px-4 border border-colorf rounded">
+                                            Wyloguj  
+                                    </div>
                                 </Link>
                             </div>      
                         }
                         {
-                            !isLogged &&
+                            !isSuccess &&
                             <div>
                                 <Link to="/signin">
                                     <div className="bg-colord hover:bg-colore text-white font-bold py-2 px-4 border border-colorf rounded">

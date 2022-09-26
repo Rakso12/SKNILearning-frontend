@@ -1,12 +1,12 @@
 import logo from "../../Resources/Images/logo_black.png";
 import { Link, useNavigate } from "@tanstack/react-location";
 import { useState } from "react";
-import axios from 'axios';
-
+import { useQueryClient } from "@tanstack/react-query";
 
 function Signin() {
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,78 +21,29 @@ function Signin() {
   const submitForm = async() => {
     event.preventDefault();
     
-    //const respon = await fetch('http://localhost:8000/sanctum/csrf-cookie');
     const requestOptions = {
       method: 'POST',
-      headers: { Accept: 'application/json','Content-Type': 'application/json' },
+      headers: { Accept: 'application/json','Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest'},
       credentials: 'include',
-      body: JSON.stringify({email,password})
+      body: JSON.stringify(
+        {
+          email,
+          password
+        }
+      )
     };
-    const response = await fetch('http://localhost:8000/api/login', requestOptions)
+    const response = await fetch('http://oki.com:8000/api/login', requestOptions)
     const data = await response.json();
+
     if(response.ok){
+      console.log('Login success = ', response);
+      queryClient.setQueryData(["user"], () => data.user);
+      console.log('Data = ', data.user);
       navigate({ to: '/courses', replace: true })
     }
-    console.log(data);
 
-
-    
-    
-    // const url = "http://127.0.0.1:8000/api/login";
-    // const data = {
-    //   email: email,
-    //   password: password
-    // }
-    // const response = await axios
-    // .post(url, data, {
-    //     withCredentials: true,
-    //     headers: {
-    //             Accept: 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    // })
-    // .then(function(res){
-    //   console.log(res);
-    // })
-    // .catch(function(err){
-    //   console.log(err);
-    // })
+    console.log('response -- ', response);
   }
-    //
-
-    // const respon = await fetch('http://localhost:8000/sanctum/csrf-cookie');
-    // const requestOptions = {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   credentials: 'include',
-    //   body: JSON.stringify({email:email})
-    // };
-    // const response = await fetch('http://localhost:8000/api/login', requestOptions)
-    // const data = await response.json();
-    // if(response.ok){
-    //   navigate({ to: '/courses', replace: true })
-    // }
-
-    // 
-    // fetch('http://127.0.0.1:8000/api/login', requestOptions)
-    //     .then(async response => {
-    //         const isJson = response.headers.get('content-type')?.includes('application/json');
-    //         const data = isJson && await response.json();
-    //         console.log(data);
-    //         // check for error response
-    //         if (!response.ok) {
-    //             // get error message from body or default to response status
-    //             const error = (data && data.message) || response.status;
-    //             return Promise.reject(error);
-    //         }
-    //         console.log(data);
-    //         navigate({ to: '/courses', replace: true })
-    //     })
-    //     .catch(error => {
-    //         console.error('There was an error!', error);
-    //         console.log(requestOptions);
-    //     });
-
 
   return (
     <div>

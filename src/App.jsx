@@ -10,6 +10,20 @@ import Homepage from './Components/Homepage/Homepage';
 import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 import Courses from './Components/Couses/Courses';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity // czas w ms po jakim dane są przestarzałe,
+    },
+  },
+});
 
 const routes = [
   {
@@ -31,13 +45,16 @@ const location = new ReactLocation();
 function App() {
 
   return (
-    <Router
-      location={location}
-      routes={routes}
-    >
-      
-      <Outlet />
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Router
+        location={location}
+        routes={routes}
+        >
+        
+        <Outlet />
+      </Router>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   )
 }
 

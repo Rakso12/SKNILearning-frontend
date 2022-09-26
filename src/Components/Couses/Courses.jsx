@@ -1,48 +1,38 @@
 import { Link } from "@tanstack/react-location";
 import homeimage from "../../Resources/Images/woman.png";
-import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+
+const getPopularCourses = () => fetch(`http://oki.com:8000/api/course/popular`).then(response => response.json());
 
 function Courses() {
 
     const submitForm = async() => {
+        
         event.preventDefault();
         const requestOptions = {
-            method: 'DELETE',
+            method: 'GET',
             headers: { Accept: 'application/json','Content-Type': 'application/json' },
             credentials: 'include'
-          };
-          const response = await fetch('http://localhost:8000/api/course/2', requestOptions)
-          const data = await response.json();
-          if(response.ok){
-            console.log("Response: OK");
-          }
-          console.log(data);
-
-        }
-        // const requestOptions = {
-        //     method: 'GET',
-        //     credentials: 'include',
-        //     headers: {  Accept: 'application/json','Content-Type': 'application/json' }
-        // };
-        // fetch('http://127.0.0.1:8000/api/courses', requestOptions)
-        //     .then(async response => {
-        //         const isJson = response.headers.get('content-type')?.includes('application/json');
-        //         const data = isJson && await response.json();
-                
-        //         // check for error response
-        //         if (!response.ok) {
-        //             // get error message from body or default to response status
-        //             const error = (data && data.message) || response.status;
-        //             return Promise.reject(error);
-        //         }
-        //         console.log(data);
-        //     })
-        //     .catch((error) => {
-        //         console.error('There was an error!', error);
-        //         console.log(requestOptions);
-        //     });
+        };
         
+        const response = await fetch('http://oki.com:8000/api/course/2', requestOptions)
+        const data = await response.json();
+        
+        if(response.ok){
+            console.log("Response: OK", response);
+        }
+        console.log(data);
+    }    
 
+    const { data, error, isLoading } = useQuery(["course.popular"], getPopularCourses);
+
+    if(isLoading) {console.log(); return "Loading...";}
+    if(error) {
+        if(error.message == "Unauthenticated."){
+            //TODO UNIEWAŻNIENIE USERA.
+        } 
+        return "An error has occured: " + error.message;
+    }
 
     return (
     <div>
@@ -58,7 +48,9 @@ function Courses() {
             </div>
         </div>
         <div className="bg-colorc text-white w-full h-96">
-            JAKIŚ TEKST BO CZEMU NIE
+            <div>
+                {data.map((course) => <div key={course.id}>{course.title}</div>)}
+            </div>
 
             <form className="bg-colore w-30 h-auto mx-auto pt-6 bg-white shadow-pathcard" onSubmit={submitForm}>
                 <div className="w-full text-center pt-8">
