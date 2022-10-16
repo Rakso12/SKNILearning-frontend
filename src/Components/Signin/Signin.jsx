@@ -1,27 +1,34 @@
 import logo from "../../Resources/Images/logo_black.png";
 import { Link, useNavigate } from "@tanstack/react-location";
-import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import {useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 function Signin() {
   const queryClient = useQueryClient();
-
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  }
+  const schema = z.object({
+    email: 
+      z.string()
+      .email("Wrong email."),
+    password:
+      z.string(),
+  });
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  }
+  const { setError, formState: { errors }, handleSubmit, register} = useForm({
+    delayError: 2000,
+    mode: "onChange",
+    resolver: zodResolver(schema)
+  });
 
-  const submitForm = async() => {
+  const submitForm = async({
+    email,
+    password,
+  }) => {
     event.preventDefault();
-    
-    const requestOptions = {
+    const response = await fetch("http://oki.com:8000/api/login", {
       method: 'POST',
       headers: { Accept: 'application/json','Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest'},
       credentials: 'include',
@@ -31,19 +38,23 @@ function Signin() {
           password
         }
       )
-    };
-    const response = await fetch('http://oki.com:8000/api/login', requestOptions)
+    });
+
     const data = await response.json();
 
-    if(response.ok){
-      console.log('Login success = ', response);
-      queryClient.setQueryData(["user"], () => data.user);
-      console.log('Data = ', data.user);
-      navigate({ to: '/courses', replace: true })
+    if (!response.ok) {
+      const error = (data && data.message) || response.status;
+      setError('password', {
+        type: "server",
+        message: data.message, //Email or password is wrong <- message from backend should be
+      })
+      return;
     }
+    console.log('Login success = ', response);
+    queryClient.setQueryData(["userInfo"], () => data.user);
+    navigate({ replace: true, to: "/" });
+  };
 
-    console.log('response -- ', response);
-  }
 
   return (
     <div>
@@ -51,7 +62,7 @@ function Signin() {
             <Link to='/'>
               <img className="h-52 mx-auto pt-4 pb-6" src={logo}/>
             </Link>
-            <form className="bg-colore w-30 h-auto mx-auto pt-6 bg-white shadow-pathcard" onSubmit={submitForm}>
+            <form className="bg-gray-50 text-colorc w-30 h-auto mx-auto pt-6  shadow-pathcard" onSubmit={handleSubmit(submitForm)}>
                 <div className="text-center p-14 font-medium text-4xl">
                   Log in
                 </div>
@@ -60,7 +71,8 @@ function Signin() {
                     <label className="w-2/3 mx-auto text-lg font-medium"> Email</label>
                   </div>
                   <div className="w-full text-center pt-2">
-                    <input className="pl-4 mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15" placeholder="User Email" onChange={handleEmailChange}></input>
+                    <input className="pl-4 mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15" {...register("email")}></input>
+                    {errors.email && <div className="text-red-700 font-medium">{errors.email.message}</div>}
                   </div>
                 </div>
                 <div>
@@ -68,12 +80,13 @@ function Signin() {
                     <label className="w-2/3 mx-auto text-lg font-medium"> Password</label>
                   </div>
                   <div className="w-full text-center pt-2">
-                    <input className="pl-4 mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15" type="password" placeholder="****************" onChange={handlePasswordChange}></input>
+                    <input className="pl-4 mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15" type="password" {...register("password")}></input>
+                    {errors.password && <div className="text-red-700 font-medium">{errors.password.message}</div>}
                   </div>
                 </div>
                 <div>
                   <div className="w-full text-center pt-8">
-                    <button className="bg-colorb text-white mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15"> Continue </button>
+                    <button className="hover:bg-colord bg-colorb text-white mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15"> Continue </button>
                   </div>
                 </div>
                 <div className="w-2/3 mx-auto pt-4">

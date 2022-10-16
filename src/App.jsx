@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import {
-  Link,
   Outlet,
   ReactLocation,
   Router,
@@ -12,6 +10,8 @@ import Signup from './Components/Signup/Signup';
 import Courses from './Components/Couses/Courses';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import CertificationsGuest from './Components/Certifications/CertificationsGuest';
+import Profile from "./Components/Profile/Profile";
 
 
 const queryClient = new QueryClient({
@@ -37,6 +37,15 @@ const routes = [
   },
   {
     path: '/courses', element: <div><Navbar></Navbar><Courses></Courses></div>
+  },
+  {
+    path: '/certificationsGuest', element: <div><Navbar></Navbar><CertificationsGuest></CertificationsGuest></div>
+  },
+  {
+    path: '/search/path', element: <div><Navbar></Navbar><Courses></Courses></div>
+  },
+  {
+    path: '/profile', element: <div><Navbar></Navbar><Profile></Profile></div>
   }
 ]
 

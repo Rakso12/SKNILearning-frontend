@@ -15,6 +15,7 @@ module.exports = {
         colorf: '#E0E1DD',
         colorg: '#E0E0E0',
         skniblue: '#007AAD',
+        colorr: '#c3d8fa',
       },
       boxShadow: {
         'pathcard':'2px 2px 16px 1px rgba(0, 0, 0, 0.25)',

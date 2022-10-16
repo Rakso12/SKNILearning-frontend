@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-location";
 import homeimage from "../../Resources/Images/woman.png";
 import { useQuery } from "@tanstack/react-query";
 
-const getPopularCourses = () => fetch(`http://oki.com:8000/api/course/popular`).then(response => response.json());
+const getPopularCourses = () => fetch(`http://oki.com:8000/api/course/search/{title}`).then(response => response.json());
 
 function Courses() {
 
