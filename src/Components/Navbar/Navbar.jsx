@@ -22,6 +22,7 @@ function Navbar() {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
+    const { data: user, refetch } = useQuery(["userInfo"], getUser);
     //Logout function
     async function logOut(){
         const requestOptions = {
@@ -45,9 +46,6 @@ function Navbar() {
         }
         console.log(data);
     }
-
-    const { data: user, refetch } = useQuery(["userInfo"], getUser);
-
 
     return (
     <div>

@@ -41,7 +41,7 @@ const getMyAttendedCourses = () => fetch(`http://oki.com:8000/api/course/myCours
 });
 
 
-function Profile(){
+function MyAuthorCourses(){
 
     const navigate = useNavigate();
     
@@ -195,4 +195,4 @@ function Profile(){
 
 }
 
-export default Profile;
+export default MyAuthorCourses;
