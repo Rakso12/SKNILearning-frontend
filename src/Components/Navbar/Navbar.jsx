@@ -64,15 +64,17 @@ function Navbar() {
                         <Link to="/">
                             <span className="p-5 hover:bg-colord"> Home </span>
                         </Link>
-                        <Link to="/certificationsGuest">
-                            <span className="p-5 hover:bg-colord"> Certifications </span>
-                        </Link>
-
-                        <input type="search" className="mx-4 block pl-4 w-72 h-11 text-sm text-colorf bg-colord rounded-md focus:ring-1 focus:outline-none focus:ring-colore" placeholder="Search courses or path..."></input>
                         
+
                         {
                             user && 
                             <div className="flex items-center p-4">
+                                <Link to="/certifications">
+                                    <span className="p-5 hover:bg-colord"> Certifications </span>
+                                </Link>
+                                
+                                <input type="search" className="mx-4 block pl-4 w-72 h-11 text-sm text-colorf bg-colord rounded-md focus:ring-1 focus:outline-none focus:ring-colore" placeholder="Search courses or path..."></input>
+                        
                                 <Link to="/profile">
                                 <img className="inline object-cover w-14 h-14 mr-2 rounded-full" src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Profile image"/>
 
@@ -87,7 +89,13 @@ function Navbar() {
                         }
                         {
                             !user &&
-                            <div>
+                            <div className="flex items-center p-4">
+                                <Link to="/certificationsGuest">
+                                    <span className="p-5 hover:bg-colord"> Certifications </span>
+                                </Link>
+                                
+                                <input type="search" className="mx-4 block pl-4 w-72 h-11 text-sm text-colorf bg-colord rounded-md focus:ring-1 focus:outline-none focus:ring-colore" placeholder="Search courses or path..."></input>
+                        
                                 <Link to="/signin">
                                     <div className="bg-colord hover:bg-colore text-white font-bold py-2 px-4 border border-colorf rounded">
                                             Zaloguj   

@@ -12,6 +12,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import CertificationsGuest from './Components/Certifications/CertificationsGuest';
 import Profile from "./Components/Profile/Profile";
+import Certifications from "./Components/Certifications/Certifications";
+import Certificate from "./Components/Certifications/Certificate";
 
 
 const queryClient = new QueryClient({
@@ -42,6 +44,15 @@ const routes = [
     path: '/certificationsGuest', element: <div><Navbar></Navbar><CertificationsGuest></CertificationsGuest></div>
   },
   {
+    path: 'certifications',
+    children: [
+      {
+        path: ':id', element: <div><Navbar></Navbar><Certificate></Certificate></div>
+      },
+    ],
+    element: <div><Navbar></Navbar><Certifications></Certifications></div>
+  },
+  {
     path: '/search/path', element: <div><Navbar></Navbar><Courses></Courses></div>
   },
   {
@@ -54,16 +65,16 @@ const location = new ReactLocation();
 function App() {
 
   return (
-    <QueryClientProvider client={queryClient}>
       <Router
-        location={location}
-        routes={routes}
-        >
-        
-        <Outlet />
-      </Router>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+          location={location}
+          routes={routes}
+          >
+      <QueryClientProvider client={queryClient}>
+          
+          <ReactQueryDevtools initialIsOpen={false} />
+          <Outlet />
+      </QueryClientProvider>
+        </Router>
   )
 }
 

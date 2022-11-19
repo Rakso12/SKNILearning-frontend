@@ -63,7 +63,7 @@ function Signin() {
       return;
     }
 
-    navigate({ replace: true, to: "/" });
+    navigate({ replace: true, to: "/signin" });
   };
 
 
