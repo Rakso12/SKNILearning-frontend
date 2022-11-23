@@ -3,13 +3,12 @@ import homeimage from "../../Resources/Images/woman.png";
 import homeimage2 from "../../Resources/Images/twoppl.png";
 import { useQuery } from "@tanstack/react-query";
 
-const getGuestCertifications = () => fetch(`http://oki.com:8000/api/certificate`)
-    .then(response => response.json());
+const getCertificates = () => fetch(`http://oki.com:8000/api/certificate`).then(response => response.json());
 
     
 function Homepage() {
 
-    const { data, isLoading } = useQuery(["certificate"], getGuestCertifications);
+    const { data, error, isLoading } = useQuery(["certificates"], getCertificates);
 
     return (
     <div>

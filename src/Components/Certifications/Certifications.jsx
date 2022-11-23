@@ -4,7 +4,7 @@ import { Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { useQuery } from "@tanstack/react-query";
 
-const getGuestCertifications = () => fetch(`http://oki.com:8000/api/certificate`).then(response => response.json());
+const getCertificates = () => fetch(`http://oki.com:8000/api/certificate`).then(response => response.json());
 
 const sortOptions = [
     { name: 'Most Popular', href: '#', current: true },
@@ -14,13 +14,9 @@ const sortOptions = [
 
 function Certifications() {
 
-    const { data, error, isLoading } = useQuery(["certificate"], getGuestCertifications);
+    const { data, error, isLoading } = useQuery(["certificates"], getCertificates);
 
     const navigate = useNavigate();
-    
-    const onClickHref = ( post ) => {
-        
-    }
 
     if(isLoading) {console.log(); return "Loading...";}
     if(error) {

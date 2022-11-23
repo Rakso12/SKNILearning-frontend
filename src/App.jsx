@@ -29,36 +29,93 @@ const queryClient = new QueryClient({
 
 const routes = [
   {
-    path: '/', element: <div><Navbar></Navbar> <Homepage></Homepage></div>
+    path: "/",
+    element: (
+      <div>
+        <Navbar></Navbar> <Homepage></Homepage>
+      </div>
+    ),
   },
   {
-    path: '/signin', element: <div><Signin></Signin></div>
+    path: "signin",
+    element: (
+      <div>
+        <Signin></Signin>
+      </div>
+    ),
   },
   {
-    path: '/signup', element: <div><Signup></Signup></div>
+    path: "signup",
+    element: (
+      <div>
+        <Signup></Signup>
+      </div>
+    ),
   },
   {
-    path: '/courses', element: <div><Navbar></Navbar><Courses></Courses></div>
+    path: "certificationsGuest",
+    element: (
+      <div>
+        <Navbar></Navbar>
+        <CertificationsGuest></CertificationsGuest>
+      </div>
+    ),
   },
   {
-    path: '/certificationsGuest', element: <div><Navbar></Navbar><CertificationsGuest></CertificationsGuest></div>
-  },
-  {
-    path: 'certifications',
+    path: "certifications",
     children: [
       {
-        path: ':id', element: <div><Navbar></Navbar><Certificate></Certificate></div>
+        path: "/",
+        element: (
+          <div>
+            <Navbar></Navbar>
+            <Certifications></Certifications>
+          </div>
+        ),
       },
+      {
+        path: ":id",
+        element: () => import("./Pages/CertificatePage.jsx").then(({ CertificatePage }) => <CertificatePage />),
+        },
     ],
-    element: <div><Navbar></Navbar><Certifications></Certifications></div>
   },
   {
-    path: '/search/path', element: <div><Navbar></Navbar><Courses></Courses></div>
+    path: "course",
+    children: [
+      {
+        path: "/",
+        element: (
+          <div>
+            <Navbar></Navbar>
+            <Courses></Courses>
+          </div>
+        ),
+      },
+      {
+        path: ":id",
+        element: () => import("./Pages/CoursePage").then(({ CoursePage }) => <CoursePage />),
+        },
+    ],
   },
   {
-    path: '/profile', element: <div><Navbar></Navbar><Profile></Profile></div>
-  }
-]
+    path: "search/path",
+    element: (
+      <div>
+        <Navbar></Navbar>
+        <Courses></Courses>
+      </div>
+    ),
+  },
+  {
+    path: "profile",
+    element: (
+      <div>
+        <Navbar></Navbar>
+        <Profile></Profile>
+      </div>
+    ),
+  },
+];
 
 const location = new ReactLocation();
 
