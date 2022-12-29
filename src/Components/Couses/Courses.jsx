@@ -2,9 +2,9 @@ import { Link } from "@tanstack/react-location";
 import homeimage from "../../Resources/Images/woman.png";
 import { useQuery } from "@tanstack/react-query";
 
-const getPopularCourses = () => fetch(`http://oki.com:8000/api/course/search/{title}`).then(response => response.json());
+const getSearchedCourses = () => fetch(`http://oki.com:8000/api/course/search/`+props.search).then(response => response.json());
 
-function Courses() {
+function Courses( props ) {
 
     const submitForm = async() => {
         
@@ -52,7 +52,7 @@ function Courses() {
                 {data.map((course) => <div key={course.id}>{course.title}</div>)}
             </div>
 
-            <form className="bg-colore w-30 h-auto mx-auto pt-6 bg-white shadow-pathcard" onSubmit={submitForm}>
+            <form className="bg-colore w-30 h-auto mx-auto pt-6 shadow-pathcard" onSubmit={submitForm}>
                 <div className="w-full text-center pt-8">
                     <button className="bg-colorb text-white mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15"> Continue </button>
                   </div>

@@ -10,10 +10,10 @@ import Signup from './Components/Signup/Signup';
 import Courses from './Components/Couses/Courses';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import CertificationsGuest from './Components/Certifications/CertificationsGuest';
 import Profile from "./Components/Profile/Profile";
-import Certifications from "./Components/Certifications/Certifications";
-import Certificate from "./Components/Certifications/Certificate";
+import Paths from "./Components/Paths/Paths";
+import PathsGuest from "./Components/Paths/PathsGuest";
+import AddCourse from "./Components/Couses/AddCourse";
 
 
 const queryClient = new QueryClient({
@@ -53,29 +53,29 @@ const routes = [
     ),
   },
   {
-    path: "certificationsGuest",
+    path: "pathsGuest",
     element: (
       <div>
         <Navbar></Navbar>
-        <CertificationsGuest></CertificationsGuest>
+        <PathsGuest></PathsGuest>
       </div>
     ),
   },
   {
-    path: "certifications",
+    path: "paths",
     children: [
       {
         path: "/",
         element: (
           <div>
             <Navbar></Navbar>
-            <Certifications></Certifications>
+            <Paths></Paths>
           </div>
         ),
       },
       {
         path: ":id",
-        element: () => import("./Pages/CertificatePage.jsx").then(({ CertificatePage }) => <CertificatePage />),
+        element: () => import("./Pages/PathPage.jsx").then(({ PathPage }) => <PathPage />),
         },
     ],
   },
@@ -94,7 +94,16 @@ const routes = [
       {
         path: ":id",
         element: () => import("./Pages/CoursePage").then(({ CoursePage }) => <CoursePage />),
-        },
+      },
+      {
+        path: "search",
+        children: [
+          {
+            path: ":title",
+            element: () => import("./Pages/CoursePage").then(({ CoursePage }) => <CoursePage />),
+          },
+        ]
+      },
     ],
   },
   {
@@ -112,6 +121,15 @@ const routes = [
       <div>
         <Navbar></Navbar>
         <Profile></Profile>
+      </div>
+    ),
+  },
+  {
+    path: "add_course",
+    element: (
+      <div>
+        <Navbar></Navbar>
+        <AddCourse></AddCourse>
       </div>
     ),
   },

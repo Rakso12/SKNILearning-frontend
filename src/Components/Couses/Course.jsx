@@ -1,7 +1,5 @@
 import { useNavigate } from "@tanstack/react-location";
 import { useQuery } from "@tanstack/react-query";
-import ReactMarkdown from "markdown-to-jsx";
-
 
 const Course = ( props ) => {
 
@@ -21,6 +19,19 @@ const Course = ( props ) => {
                 }
                 return response.json(); 
     });
+    
+    const onClickCourseFinished = async () => {
+        console.log("finished?")
+        const response = await fetch("http://oki.com:8000/api/course/" + props.course_id, {
+            body: JSON.stringify({
+                
+            state: "is_finished"
+            }),
+            headers: { "Content-Type": "application/json" },
+            method: "POST",
+        });
+    }
+
 
     const { data, error, isLoading, refetch } = useQuery(["course"], getCourse);
     refetch();
@@ -34,7 +45,6 @@ const Course = ( props ) => {
         } 
         return "An error has occured: " + error.message;
     }
-
 
     return (
     <div>
@@ -60,16 +70,20 @@ const Course = ( props ) => {
                         </blockquote>
                     </div>
                 </figure>
-
             </div>
         </div>
 
         <div className="w-3/4 mx-auto">
             <div className="bg-white">
-                <div className="mx-auto w-3/4 pb-2">
+                <div className="mx-auto w-3/4 pb-2 mt-12">
                     {!isLoading && 
                         <article>{data.content}
                         </article>}
+                    {
+                        <div className="bg-colord w-40 text-center mx-auto mt-12 hover:bg-colore text-white font-bold py-2 px-4 border border-colorf rounded" onClick={ onClickCourseFinished }>
+                                Zakończ kurs!
+                        </div>
+                    }
                 </div>
             </div>
         </div>

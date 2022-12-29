@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-location";
 import logo from "../../Resources/Images/logoSKNILearning.png";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 
 const getUser = () => fetch(`http://oki.com:8000/api/info`, {
     headers: { 
@@ -21,6 +22,18 @@ function Navbar() {
 
     const queryClient = useQueryClient();
     const navigate = useNavigate();
+    
+    const { formState: { errors }, handleSubmit, register} = useForm({
+        delayError: 2000,
+        mode: "onChange",
+    });
+
+    const submitForm = async ({
+        search,
+      }) => {
+        console.log(search);
+        navigate({ to: '/course/search/'+search, replace: true})
+      };
 
     const { data: user, refetch } = useQuery(["userInfo"], getUser);
     //Logout function
@@ -69,20 +82,28 @@ function Navbar() {
                         {
                             user && 
                             <div className="flex items-center p-4">
-                                <Link to="/certifications">
-                                    <span className="p-5 hover:bg-colord"> Certifications </span>
+                                <Link to="/paths">
+                                    <span className="p-5 hover:bg-colord"> Paths </span>
                                 </Link>
                                 
-                                <input type="search" className="mx-4 block pl-4 w-72 h-11 text-sm text-colorf bg-colord rounded-md focus:ring-1 focus:outline-none focus:ring-colore" placeholder="Search courses or path..."></input>
-                        
-                                <Link to="/profile">
-                                <img className="inline object-cover w-14 h-14 mr-2 rounded-full" src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Profile image"/>
+                                <form onSubmit={handleSubmit(submitForm)}>
+                                    <div className="relative m-8 w-72">
+                                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                            <svg aria-hidden="true" className="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                        </div>
+                                        <input type="search" className="block w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Search courses..." required {...register("search")}/>
+                                        <button type="submit" className="text-white absolute right-2 bottom-1.5 bg-colord hover:bg-colore focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1.5">Search</button>
+                                    </div>
+                                </form>
 
+                                <Link to="/profile">
+                                    { !user.isLoading && (user.image_path == null) && <img className="inline object-cover w-14 h-14 mr-2 rounded-full" src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt=""/> }
+                                    { !user.isLoading && (user.image_path != null) && <img className="inline object-cover w-14 h-14 mr-2 rounded-full" src={user.image_path} alt=""/>}
                                 </Link>
 
                                 <Link to="/logout">
-                                    <div onClick={() => {queryClient.removeQueries("user"); logOut();}} className="bg-colord hover:bg-colore text-white font-bold py-2 px-4 border border-colorf rounded">
-                                            Wyloguj
+                                    <div onClick={() => {queryClient.removeQueries("user"); logOut();}} className="bg-colord hover:bg-colore text-white font-bold py-2 px-4 rounded">
+                                            Logout
                                     </div>
                                 </Link>
                             </div>      
@@ -90,15 +111,15 @@ function Navbar() {
                         {
                             !user &&
                             <div className="flex items-center p-4">
-                                <Link to="/certificationsGuest">
-                                    <span className="p-5 hover:bg-colord"> Certifications </span>
+                                <Link to="/pathsGuest">
+                                    <span className="p-5 hover:bg-colord"> Paths </span>
                                 </Link>
                                 
                                 <input type="search" className="mx-4 block pl-4 w-72 h-11 text-sm text-colorf bg-colord rounded-md focus:ring-1 focus:outline-none focus:ring-colore" placeholder="Search courses or path..."></input>
                         
                                 <Link to="/signin">
                                     <div className="bg-colord hover:bg-colore text-white font-bold py-2 px-4 border border-colorf rounded">
-                                            Zaloguj   
+                                            Log in   
                                     </div>
                                 </Link>
                             </div>
