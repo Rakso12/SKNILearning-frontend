@@ -1,6 +1,8 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-location";
 import { data } from "autoprefixer";
+import EditModal from "./EditModal";
+import { useState } from "react";
 
 const getUser = () => fetch(`http://oki.com:8000/api/info`, {
     headers: { 
@@ -46,7 +48,17 @@ function Profile(){
 
     const navigate = useNavigate();
     
+    const [openModal, setOpenModal] = useState(false);
+
     const user = useQuery(["userInfo"], getUser);
+    
+    const refetchUser = () => {
+        user.refetch();
+    }
+
+    if(!openModal){
+        refetchUser();
+    }
 
     const myAuthorCourses = useQuery(["myAuthorCourses"], getMyAuthorCourses);
 
@@ -62,13 +74,14 @@ function Profile(){
     return (
 
         <div className="h-full">
+            {openModal && <EditModal closeModal={setOpenModal}></EditModal>}
             <div className="container h-full mx-auto p-5">
                 <div className="md:flex no-wrap md:-mx-2">
                     <div className="w-full md:w-3/12 md:mx-2 border-2 border-colore">
                         <div className="bg-white p-3 border-t-4 border-colore">
                             <div className="image overflow-hidden">
-                                { !user.isLoading && (user.data.image_path == null) && <img className="h-96 w-auto mx-auto" src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt=""/> }
-                                { !user.isLoading && (user.data.image_path != null) && <img className="h-auto w-full mx-auto" src={user.data.image_path} alt=""/>}
+                                { !user.isLoading && (user.data.image_path == null) && <img className="h-96 w-auto mx-auto cursor-pointer" onClick={() => {setOpenModal(true)}} src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt=""/> }
+                                { !user.isLoading && (user.data.image_path != null) && <img className="h-auto w-full mx-auto cursor-pointer" onClick={() => {setOpenModal(true)}} src={user.data.image_path} alt=""/>}
                             </div>
                             <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                                 <li className="py-5">

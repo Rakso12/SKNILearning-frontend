@@ -1,6 +1,11 @@
 import { useNavigate } from "@tanstack/react-location";
 import { useQuery } from "@tanstack/react-query";
 
+import remarkGfm from "remark-gfm";
+import ReactMarkdown from "react-markdown";
+
+import style from "./markdown.module.css";
+
 const Course = ( props ) => {
 
     var url = "http://oki.com:8000/api/course/" + props.course_id;
@@ -32,6 +37,13 @@ const Course = ( props ) => {
         });
     }
 
+    const addToMyCourses = async () => {
+        const response = await fetch("http://oki.com:8000/api/course/" + props.course_id + "/join", {
+            method: 'POST',
+            headers: { Accept: 'application/json','Content-Type': 'application/json' },
+            credentials: 'include',
+        });
+    }
 
     const { data, error, isLoading, refetch } = useQuery(["course"], getCourse);
     refetch();
@@ -62,7 +74,8 @@ const Course = ( props ) => {
                     <div className="p-2 text-center md:text-left">
                         <blockquote>
                             <p className="p-4 text-3xl">
-                                {!isLoading && data.title}
+                                <span className="">{!isLoading && data.title}</span>
+                                <button className="float-right bg-green-800 rounded-md px-3 py-2 text-base text-white hover:bg-green-600" onClick={ addToMyCourses }> Add to my courses</button>
                             </p>
                             <p className="p-4 text-lg">
                                 {!isLoading && data.description}
@@ -77,16 +90,19 @@ const Course = ( props ) => {
             <div className="bg-white">
                 <div className="mx-auto w-3/4 pb-2 mt-12">
                     {!isLoading && 
-                        <article>{data.content}
-                        </article>}
+                        
+                        <ReactMarkdown className={style.ReactMarkdown} children={data.content} remarkPlugins={[remarkGfm]} />
+                    }
                     {
-                        <div className="bg-colord w-40 text-center mx-auto mt-12 hover:bg-colore text-white font-bold py-2 px-4 border border-colorf rounded" onClick={ onClickCourseFinished }>
-                                Zakończ kurs!
-                        </div>
+                    <div className="bg-colord w-40 text-center mx-auto mt-12 hover:bg-colore text-white font-bold py-2 px-4 border border-colorf rounded" onClick={ onClickCourseFinished }>
+                            Complete the course!
+                    </div>
                     }
                 </div>
             </div>
         </div>
+        
+
     </div>
     );
 }

@@ -31,7 +31,6 @@ function Navbar() {
     const submitForm = async ({
         search,
       }) => {
-        console.log(search);
         navigate({ to: '/course/search/'+search, replace: true})
       };
 
@@ -54,7 +53,6 @@ function Navbar() {
             // const data = queryClient.getQueryData(["course.popular"]);
             // queryClient.clear();
             // queryClient.setQueryData(["course.popular"], () => data);
-
             navigate({ to: '/', replace: true })
         }
         console.log(data);
@@ -115,8 +113,16 @@ function Navbar() {
                                     <span className="p-5 hover:bg-colord"> Paths </span>
                                 </Link>
                                 
-                                <input type="search" className="mx-4 block pl-4 w-72 h-11 text-sm text-colorf bg-colord rounded-md focus:ring-1 focus:outline-none focus:ring-colore" placeholder="Search courses or path..."></input>
-                        
+                                <form onSubmit={handleSubmit(submitForm)}>
+                                    <div className="relative m-8 w-72">
+                                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                            <svg aria-hidden="true" className="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                        </div>
+                                        <input type="search" className="block w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Search courses..." required {...register("search")}/>
+                                        <button type="submit" className="text-white absolute right-2 bottom-1.5 bg-colord hover:bg-colore focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1.5">Search</button>
+                                    </div>
+                                </form>
+                                
                                 <Link to="/signin">
                                     <div className="bg-colord hover:bg-colore text-white font-bold py-2 px-4 border border-colorf rounded">
                                             Log in   

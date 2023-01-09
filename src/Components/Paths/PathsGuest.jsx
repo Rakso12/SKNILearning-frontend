@@ -7,7 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 const getPaths = () => fetch(`http://oki.com:8000/api/path`).then(response => response.json());
 
 const sortOptions = [
-    { name: 'Most Popular', href: '#', current: true },
     { name: 'Best Rating', href: '#', current: false },
     { name: 'Newest', href: '#', current: false },
   ]

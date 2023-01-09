@@ -1,18 +1,16 @@
 import { useMatch } from "@tanstack/react-location";
-import Course from "../Components/Couses/Course";
+import Courses from "../Components/Couses/Courses";
 import Navbar from "../Components/Navbar/Navbar"
 
-export const CoursePage = () => {
+export const CoursesPage = () => {
   const {
-    params: { id},
+    params: { id, title},
   } = useMatch();
-
-  console.log("Weszło do coursePage");
 
   return(
       <>
       <Navbar></Navbar>
-      <Course course_id = {id}></Course>
+      <Courses course_id = {id} title = {title} ></Courses>
       </>
   );
 }

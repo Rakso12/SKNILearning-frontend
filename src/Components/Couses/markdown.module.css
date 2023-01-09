@@ -1,0 +1,940 @@
+.ReactMarkdown {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    color: #24292f;
+    background-color: #ffffff;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+  
+  .ReactMarkdown .octicon {
+    display: inline-block;
+    fill: currentColor;
+    vertical-align: text-bottom;
+  }
+  
+  .ReactMarkdown h1:hover .anchor .octicon-link:before,
+  .ReactMarkdown h2:hover .anchor .octicon-link:before,
+  .ReactMarkdown h3:hover .anchor .octicon-link:before,
+  .ReactMarkdown h4:hover .anchor .octicon-link:before,
+  .ReactMarkdown h5:hover .anchor .octicon-link:before,
+  .ReactMarkdown h6:hover .anchor .octicon-link:before {
+    width: 16px;
+    height: 16px;
+    content: ' ';
+    display: inline-block;
+    background-color: currentColor;
+    -webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+    mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+  }
+  
+  .ReactMarkdown details,
+  .ReactMarkdown figcaption,
+  .ReactMarkdown figure {
+    display: block;
+  }
+  
+  .ReactMarkdown summary {
+    display: list-item;
+  }
+  
+  .ReactMarkdown [hidden] {
+    display: none !important;
+  }
+  
+  .ReactMarkdown a {
+    background-color: transparent;
+    color: #0969da;
+    text-decoration: none;
+  }
+  
+  .ReactMarkdown a:active,
+  .ReactMarkdown a:hover {
+    outline-width: 0;
+  }
+  
+  .ReactMarkdown abbr[title] {
+    border-bottom: none;
+    text-decoration: underline dotted;
+  }
+  
+  .ReactMarkdown b,
+  .ReactMarkdown strong {
+    font-weight: 600;
+  }
+  
+  .ReactMarkdown dfn {
+    font-style: italic;
+  }
+  
+  .ReactMarkdown h1 {
+    margin: .67em 0;
+    font-weight: 600;
+    padding-bottom: .3em;
+    font-size: 2em;
+    border-bottom: 1px solid hsla(210,18%,87%,1);
+  }
+  
+  .ReactMarkdown mark {
+    background-color: #fff8c5;
+    color: #24292f;
+  }
+  
+  .ReactMarkdown small {
+    font-size: 90%;
+  }
+  
+  .ReactMarkdown sub,
+  .ReactMarkdown sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  
+  .ReactMarkdown sub {
+    bottom: -0.25em;
+  }
+  
+  .ReactMarkdown sup {
+    top: -0.5em;
+  }
+  
+  .ReactMarkdown img {
+    border-style: none;
+    max-width: 100%;
+    box-sizing: content-box;
+    background-color: #ffffff;
+  }
+  
+  .ReactMarkdown code,
+  .ReactMarkdown kbd,
+  .ReactMarkdown pre,
+  .ReactMarkdown samp {
+    font-family: monospace,monospace;
+    font-size: 1em;
+  }
+  
+  .ReactMarkdown figure {
+    margin: 1em 40px;
+  }
+  
+  .ReactMarkdown hr {
+    box-sizing: content-box;
+    overflow: hidden;
+    background: transparent;
+    border-bottom: 1px solid hsla(210,18%,87%,1);
+    height: .25em;
+    padding: 0;
+    margin: 24px 0;
+    background-color: #d0d7de;
+    border: 0;
+  }
+  
+  .ReactMarkdown input {
+    font: inherit;
+    margin: 0;
+    overflow: visible;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  
+  .ReactMarkdown [type=button],
+  .ReactMarkdown [type=reset],
+  .ReactMarkdown [type=submit] {
+    -webkit-appearance: button;
+  }
+  
+  .ReactMarkdown [type=button]::-moz-focus-inner,
+  .ReactMarkdown [type=reset]::-moz-focus-inner,
+  .ReactMarkdown [type=submit]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+  
+  .ReactMarkdown [type=button]:-moz-focusring,
+  .ReactMarkdown [type=reset]:-moz-focusring,
+  .ReactMarkdown [type=submit]:-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+  
+  .ReactMarkdown [type=checkbox],
+  .ReactMarkdown [type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+  }
+  
+  .ReactMarkdown [type=number]::-webkit-inner-spin-button,
+  .ReactMarkdown [type=number]::-webkit-outer-spin-button {
+    height: auto;
+  }
+  
+  .ReactMarkdown [type=search] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+  }
+  
+  .ReactMarkdown [type=search]::-webkit-search-cancel-button,
+  .ReactMarkdown [type=search]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  
+  .ReactMarkdown ::-webkit-input-placeholder {
+    color: inherit;
+    opacity: .54;
+  }
+  
+  .ReactMarkdown ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+  }
+  
+  .ReactMarkdown a:hover {
+    text-decoration: underline;
+  }
+  
+  .ReactMarkdown hr::before {
+    display: table;
+    content: "";
+  }
+  
+  .ReactMarkdown hr::after {
+    display: table;
+    clear: both;
+    content: "";
+  }
+  
+  .ReactMarkdown table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+  }
+  
+  .ReactMarkdown td,
+  .ReactMarkdown th {
+    padding: 0;
+  }
+  
+  .ReactMarkdown details summary {
+    cursor: pointer;
+  }
+  
+  .ReactMarkdown details:not([open])>*:not(summary) {
+    display: none !important;
+  }
+  
+  .ReactMarkdown kbd {
+    display: inline-block;
+    padding: 3px 5px;
+    font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+    line-height: 10px;
+    color: #24292f;
+    vertical-align: middle;
+    background-color: #f6f8fa;
+    border: solid 1px rgba(175,184,193,0.2);
+    border-bottom-color: rgba(175,184,193,0.2);
+    border-radius: 6px;
+    box-shadow: inset 0 -1px 0 rgba(175,184,193,0.2);
+  }
+  
+  .ReactMarkdown h1,
+  .ReactMarkdown h2,
+  .ReactMarkdown h3,
+  .ReactMarkdown h4,
+  .ReactMarkdown h5,
+  .ReactMarkdown h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  
+  .ReactMarkdown h2 {
+    font-weight: 600;
+    padding-bottom: .3em;
+    font-size: 1.5em;
+    border-bottom: 1px solid hsla(210,18%,87%,1);
+  }
+  
+  .ReactMarkdown h3 {
+    font-weight: 600;
+    font-size: 1.25em;
+  }
+  
+  .ReactMarkdown h4 {
+    font-weight: 600;
+    font-size: 1em;
+  }
+  
+  .ReactMarkdown h5 {
+    font-weight: 600;
+    font-size: .875em;
+  }
+  
+  .ReactMarkdown h6 {
+    font-weight: 600;
+    font-size: .85em;
+    color: #57606a;
+  }
+  
+  .ReactMarkdown p {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  .ReactMarkdown blockquote {
+    margin: 0;
+    padding: 0 1em;
+    color: #57606a;
+    border-left: .25em solid #d0d7de;
+  }
+  
+  .ReactMarkdown ul,
+  .ReactMarkdown ol {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 2em;
+  }
+  
+  .ReactMarkdown ol ol,
+  .ReactMarkdown ul ol {
+    list-style-type: lower-roman;
+  }
+  
+  .ReactMarkdown ul ul ol,
+  .ReactMarkdown ul ol ol,
+  .ReactMarkdown ol ul ol,
+  .ReactMarkdown ol ol ol {
+    list-style-type: lower-alpha;
+  }
+  
+  .ReactMarkdown dd {
+    margin-left: 0;
+  }
+  
+  .ReactMarkdown tt,
+  .ReactMarkdown code {
+    font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+    font-size: 12px;
+  }
+  
+  .ReactMarkdown pre {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+    font-size: 12px;
+    word-wrap: normal;
+  }
+  
+  .ReactMarkdown .octicon {
+    display: inline-block;
+    overflow: visible !important;
+    vertical-align: text-bottom;
+    fill: currentColor;
+  }
+  
+  .ReactMarkdown ::placeholder {
+    color: #6e7781;
+    opacity: 1;
+  }
+  
+  .ReactMarkdown input::-webkit-outer-spin-button,
+  .ReactMarkdown input::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  .ReactMarkdown .pl-c {
+    color: #6e7781;
+  }
+  
+  .ReactMarkdown .pl-c1,
+  .ReactMarkdown .pl-s .pl-v {
+    color: #0550ae;
+  }
+  
+  .ReactMarkdown .pl-e,
+  .ReactMarkdown .pl-en {
+    color: #8250df;
+  }
+  
+  .ReactMarkdown .pl-smi,
+  .ReactMarkdown .pl-s .pl-s1 {
+    color: #24292f;
+  }
+  
+  .ReactMarkdown .pl-ent {
+    color: #116329;
+  }
+  
+  .ReactMarkdown .pl-k {
+    color: #cf222e;
+  }
+  
+  .ReactMarkdown .pl-s,
+  .ReactMarkdown .pl-pds,
+  .ReactMarkdown .pl-s .pl-pse .pl-s1,
+  .ReactMarkdown .pl-sr,
+  .ReactMarkdown .pl-sr .pl-cce,
+  .ReactMarkdown .pl-sr .pl-sre,
+  .ReactMarkdown .pl-sr .pl-sra {
+    color: #0a3069;
+  }
+  
+  .ReactMarkdown .pl-v,
+  .ReactMarkdown .pl-smw {
+    color: #953800;
+  }
+  
+  .ReactMarkdown .pl-bu {
+    color: #82071e;
+  }
+  
+  .ReactMarkdown .pl-ii {
+    color: #f6f8fa;
+    background-color: #82071e;
+  }
+  
+  .ReactMarkdown .pl-c2 {
+    color: #f6f8fa;
+    background-color: #cf222e;
+  }
+  
+  .ReactMarkdown .pl-sr .pl-cce {
+    font-weight: bold;
+    color: #116329;
+  }
+  
+  .ReactMarkdown .pl-ml {
+    color: #3b2300;
+  }
+  
+  .ReactMarkdown .pl-mh,
+  .ReactMarkdown .pl-mh .pl-en,
+  .ReactMarkdown .pl-ms {
+    font-weight: bold;
+    color: #0550ae;
+  }
+  
+  .ReactMarkdown .pl-mi {
+    font-style: italic;
+    color: #24292f;
+  }
+  
+  .ReactMarkdown .pl-mb {
+    font-weight: bold;
+    color: #24292f;
+  }
+  
+  .ReactMarkdown .pl-md {
+    color: #82071e;
+    background-color: #FFEBE9;
+  }
+  
+  .ReactMarkdown .pl-mi1 {
+    color: #116329;
+    background-color: #dafbe1;
+  }
+  
+  .ReactMarkdown .pl-mc {
+    color: #953800;
+    background-color: #ffd8b5;
+  }
+  
+  .ReactMarkdown .pl-mi2 {
+    color: #eaeef2;
+    background-color: #0550ae;
+  }
+  
+  .ReactMarkdown .pl-mdr {
+    font-weight: bold;
+    color: #8250df;
+  }
+  
+  .ReactMarkdown .pl-ba {
+    color: #57606a;
+  }
+  
+  .ReactMarkdown .pl-sg {
+    color: #8c959f;
+  }
+  
+  .ReactMarkdown .pl-corl {
+    text-decoration: underline;
+    color: #0a3069;
+  }
+  
+  .ReactMarkdown [data-catalyst] {
+    display: block;
+  }
+  
+  .ReactMarkdown g-emoji {
+    font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 1em;
+    font-style: normal !important;
+    font-weight: 400;
+    line-height: 1;
+    vertical-align: -0.075em;
+  }
+  
+  .ReactMarkdown g-emoji img {
+    width: 1em;
+    height: 1em;
+  }
+  
+  .ReactMarkdown::before {
+    display: table;
+    content: "";
+  }
+  
+  .ReactMarkdown::after {
+    display: table;
+    clear: both;
+    content: "";
+  }
+  
+  .ReactMarkdown>*:first-child {
+    margin-top: 0 !important;
+  }
+  
+  .ReactMarkdown>*:last-child {
+    margin-bottom: 0 !important;
+  }
+  
+  .ReactMarkdown a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .ReactMarkdown .absent {
+    color: #cf222e;
+  }
+  
+  .ReactMarkdown .anchor {
+    float: left;
+    padding-right: 4px;
+    margin-left: -20px;
+    line-height: 1;
+  }
+  
+  .ReactMarkdown .anchor:focus {
+    outline: none;
+  }
+  
+  .ReactMarkdown p,
+  .ReactMarkdown blockquote,
+  .ReactMarkdown ul,
+  .ReactMarkdown ol,
+  .ReactMarkdown dl,
+  .ReactMarkdown table,
+  .ReactMarkdown pre,
+  .ReactMarkdown details {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+  
+  .ReactMarkdown blockquote>:first-child {
+    margin-top: 0;
+  }
+  
+  .ReactMarkdown blockquote>:last-child {
+    margin-bottom: 0;
+  }
+  
+  .ReactMarkdown sup>a::before {
+    content: "[";
+  }
+  
+  .ReactMarkdown sup>a::after {
+    content: "]";
+  }
+  
+  .ReactMarkdown h1 .octicon-link,
+  .ReactMarkdown h2 .octicon-link,
+  .ReactMarkdown h3 .octicon-link,
+  .ReactMarkdown h4 .octicon-link,
+  .ReactMarkdown h5 .octicon-link,
+  .ReactMarkdown h6 .octicon-link {
+    color: #24292f;
+    vertical-align: middle;
+    visibility: hidden;
+  }
+  
+  .ReactMarkdown h1:hover .anchor,
+  .ReactMarkdown h2:hover .anchor,
+  .ReactMarkdown h3:hover .anchor,
+  .ReactMarkdown h4:hover .anchor,
+  .ReactMarkdown h5:hover .anchor,
+  .ReactMarkdown h6:hover .anchor {
+    text-decoration: none;
+  }
+  
+  .ReactMarkdown h1:hover .anchor .octicon-link,
+  .ReactMarkdown h2:hover .anchor .octicon-link,
+  .ReactMarkdown h3:hover .anchor .octicon-link,
+  .ReactMarkdown h4:hover .anchor .octicon-link,
+  .ReactMarkdown h5:hover .anchor .octicon-link,
+  .ReactMarkdown h6:hover .anchor .octicon-link {
+    visibility: visible;
+  }
+  
+  .ReactMarkdown h1 tt,
+  .ReactMarkdown h1 code,
+  .ReactMarkdown h2 tt,
+  .ReactMarkdown h2 code,
+  .ReactMarkdown h3 tt,
+  .ReactMarkdown h3 code,
+  .ReactMarkdown h4 tt,
+  .ReactMarkdown h4 code,
+  .ReactMarkdown h5 tt,
+  .ReactMarkdown h5 code,
+  .ReactMarkdown h6 tt,
+  .ReactMarkdown h6 code {
+    padding: 0 .2em;
+    font-size: inherit;
+  }
+  
+  .ReactMarkdown ul.no-list,
+  .ReactMarkdown ol.no-list {
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .ReactMarkdown ol[type="1"] {
+    list-style-type: decimal;
+  }
+  
+  .ReactMarkdown ol[type=a] {
+    list-style-type: lower-alpha;
+  }
+  
+  .ReactMarkdown ol[type=i] {
+    list-style-type: lower-roman;
+  }
+  
+  .ReactMarkdown div>ol:not([type]) {
+    list-style-type: decimal;
+  }
+  
+  .ReactMarkdown ul ul,
+  .ReactMarkdown ul ol,
+  .ReactMarkdown ol ol,
+  .ReactMarkdown ol ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  .ReactMarkdown li>p {
+    margin-top: 16px;
+  }
+  
+  .ReactMarkdown li+li {
+    margin-top: .25em;
+  }
+  
+  .ReactMarkdown dl {
+    padding: 0;
+  }
+  
+  .ReactMarkdown dl dt {
+    padding: 0;
+    margin-top: 16px;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 600;
+  }
+  
+  .ReactMarkdown dl dd {
+    padding: 0 16px;
+    margin-bottom: 16px;
+  }
+  
+  .ReactMarkdown table th {
+    font-weight: 600;
+  }
+  
+  .ReactMarkdown table th,
+  .ReactMarkdown table td {
+    padding: 6px 13px;
+    border: 1px solid #d0d7de;
+  }
+  
+  .ReactMarkdown table tr {
+    background-color: #ffffff;
+    border-top: 1px solid hsla(210,18%,87%,1);
+  }
+  
+  .ReactMarkdown table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+  
+  .ReactMarkdown table img {
+    background-color: transparent;
+  }
+  
+  .ReactMarkdown img[align=right] {
+    padding-left: 20px;
+  }
+  
+  .ReactMarkdown img[align=left] {
+    padding-right: 20px;
+  }
+  
+  .ReactMarkdown .emoji {
+    max-width: none;
+    vertical-align: text-top;
+    background-color: transparent;
+  }
+  
+  .ReactMarkdown span.frame {
+    display: block;
+    overflow: hidden;
+  }
+  
+  .ReactMarkdown span.frame>span {
+    display: block;
+    float: left;
+    width: auto;
+    padding: 7px;
+    margin: 13px 0 0;
+    overflow: hidden;
+    border: 1px solid #d0d7de;
+  }
+  
+  .ReactMarkdown span.frame span img {
+    display: block;
+    float: left;
+  }
+  
+  .ReactMarkdown span.frame span span {
+    display: block;
+    padding: 5px 0 0;
+    clear: both;
+    color: #24292f;
+  }
+  
+  .ReactMarkdown span.align-center {
+    display: block;
+    overflow: hidden;
+    clear: both;
+  }
+  
+  .ReactMarkdown span.align-center>span {
+    display: block;
+    margin: 13px auto 0;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .ReactMarkdown span.align-center span img {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .ReactMarkdown span.align-right {
+    display: block;
+    overflow: hidden;
+    clear: both;
+  }
+  
+  .ReactMarkdown span.align-right>span {
+    display: block;
+    margin: 13px 0 0;
+    overflow: hidden;
+    text-align: right;
+  }
+  
+  .ReactMarkdown span.align-right span img {
+    margin: 0;
+    text-align: right;
+  }
+  
+  .ReactMarkdown span.float-left {
+    display: block;
+    float: left;
+    margin-right: 13px;
+    overflow: hidden;
+  }
+  
+  .ReactMarkdown span.float-left span {
+    margin: 13px 0 0;
+  }
+  
+  .ReactMarkdown span.float-right {
+    display: block;
+    float: right;
+    margin-left: 13px;
+    overflow: hidden;
+  }
+  
+  .ReactMarkdown span.float-right>span {
+    display: block;
+    margin: 13px auto 0;
+    overflow: hidden;
+    text-align: right;
+  }
+  
+  .ReactMarkdown code,
+  .ReactMarkdown tt {
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(175,184,193,0.2);
+    border-radius: 6px;
+  }
+  
+  .ReactMarkdown code br,
+  .ReactMarkdown tt br {
+    display: none;
+  }
+  
+  .ReactMarkdown del code {
+    text-decoration: inherit;
+  }
+  
+  .ReactMarkdown pre code {
+    font-size: 100%;
+  }
+  
+  .ReactMarkdown pre>code {
+    padding: 0;
+    margin: 0;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+  
+  .ReactMarkdown .highlight {
+    margin-bottom: 16px;
+  }
+  
+  .ReactMarkdown .highlight pre {
+    margin-bottom: 0;
+    word-break: normal;
+  }
+  
+  .ReactMarkdown .highlight pre,
+  .ReactMarkdown pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 6px;
+  }
+  
+  .ReactMarkdown pre code,
+  .ReactMarkdown pre tt {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+  
+  .ReactMarkdown .csv-data td,
+  .ReactMarkdown .csv-data th {
+    padding: 5px;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 1;
+    text-align: left;
+    white-space: nowrap;
+  }
+  
+  .ReactMarkdown .csv-data .blob-num {
+    padding: 10px 8px 9px;
+    text-align: right;
+    background: #ffffff;
+    border: 0;
+  }
+  
+  .ReactMarkdown .csv-data tr {
+    border-top: 0;
+  }
+  
+  .ReactMarkdown .csv-data th {
+    font-weight: 600;
+    background: #f6f8fa;
+    border-top: 0;
+  }
+  
+  .ReactMarkdown .footnotes {
+    font-size: 12px;
+    color: #57606a;
+    border-top: 1px solid #d0d7de;
+  }
+  
+  .ReactMarkdown .footnotes ol {
+    padding-left: 16px;
+  }
+  
+  .ReactMarkdown .footnotes li {
+    position: relative;
+  }
+  
+  .ReactMarkdown .footnotes li:target::before {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    bottom: -8px;
+    left: -24px;
+    pointer-events: none;
+    content: "";
+    border: 2px solid #0969da;
+    border-radius: 6px;
+  }
+  
+  .ReactMarkdown .footnotes li:target {
+    color: #24292f;
+  }
+  
+  .ReactMarkdown .footnotes .data-footnote-backref g-emoji {
+    font-family: monospace;
+  }
+  
+  .ReactMarkdown .task-list-item {
+    list-style-type: none;
+  }
+  
+  .ReactMarkdown .task-list-item label {
+    font-weight: 400;
+  }
+  
+  .ReactMarkdown .task-list-item.enabled label {
+    cursor: pointer;
+  }
+  
+  .ReactMarkdown .task-list-item+.task-list-item {
+    margin-top: 3px;
+  }
+  
+  .ReactMarkdown .task-list-item .handle {
+    display: none;
+  }
+  
+  .ReactMarkdown .task-list-item-checkbox {
+    margin: 0 .2em .25em -1.6em;
+    vertical-align: middle;
+  }
+  
+  .ReactMarkdown .contains-task-list:dir(rtl) .task-list-item-checkbox {
+    margin: 0 -1.6em .25em .2em;
+  }
+  
+  .ReactMarkdown ::-webkit-calendar-picker-indicator {
+    filter: invert(50%);
+  }

@@ -17,7 +17,7 @@ function AddCourse() {
     z.string(),
   });
 
-  const { setError, formState: { errors }, handleSubmit, addCourse} = useForm({
+  const { setError, formState: { errors }, handleSubmit, register} = useForm({
     delayError: 2000,
     mode: "onChange",
     resolver: zodResolver(schema)
@@ -29,7 +29,7 @@ function AddCourse() {
     content,
   }) => {
     event.preventDefault();
-    const response = await fetch("http://oki.com:8000/api/login", {
+    const response = await fetch("http://oki.com:8000/api/course", {
       method: 'POST',
       headers: { Accept: 'application/json','Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest'},
       credentials: 'include',
@@ -52,8 +52,7 @@ function AddCourse() {
       })
       return;
     }
-    console.log('Login success = ', response);
-    queryClient.setQueryData(["userInfo"], () => data.user);
+    await queryClient.refetchQueries();
     navigate({ replace: true, to: "/profile" });
   };
 
@@ -70,7 +69,7 @@ function AddCourse() {
                     <label className="w-2/3 mx-auto text-lg font-medium"> Title</label>
                   </div>
                   <div className="w-full text-center pt-2">
-                    <input className="pl-4 mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15" {...addCourse("title")}></input>
+                    <input className="pl-4 mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15" {...register("title")}></input>
                     {errors.title && <div className="text-red-700 font-medium">{errors.title.message}</div>}
                   </div>
                 </div>
@@ -79,7 +78,7 @@ function AddCourse() {
                     <label className="w-2/3 mx-auto text-lg font-medium"> Description</label>
                   </div>
                   <div className="w-full text-center pt-2">
-                    <input className="pl-4 mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15" {...addCourse("description")}></input>
+                    <input className="pl-4 mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15" {...register("description")}></input>
                     {errors.description && <div className="text-red-700 font-medium">{errors.description.message}</div>}
                   </div>
                 </div>
@@ -88,7 +87,7 @@ function AddCourse() {
                     <label className="w-2/3 mx-auto text-lg font-medium"> Content </label>
                   </div>
                   <div className="w-full text-center pt-2">
-                    <input className="pl-4 mx-auto border-2 round-sm w-2/3 h-11 border-colorb/15" {...addCourse("content")}></input>
+                  <textarea id="message" rows="4" class="w-2/3 mx-auto border-2 round-sm border-colorb/15" placeholder="..." {...register("content")}></textarea>
                     {errors.password && <div className="text-red-700 font-medium">{errors.password.message}</div>}
                   </div>
                 </div>

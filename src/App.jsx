@@ -32,7 +32,8 @@ const routes = [
     path: "/",
     element: (
       <div>
-        <Navbar></Navbar> <Homepage></Homepage>
+        <Navbar></Navbar> 
+        <Homepage></Homepage>
       </div>
     ),
   },
@@ -79,7 +80,7 @@ const routes = [
         },
     ],
   },
-  {
+ {
     path: "course",
     children: [
       {
@@ -92,17 +93,21 @@ const routes = [
         ),
       },
       {
-        path: ":id",
-        element: () => import("./Pages/CoursePage").then(({ CoursePage }) => <CoursePage />),
-      },
-      {
         path: "search",
         children: [
           {
             path: ":title",
-            element: () => import("./Pages/CoursePage").then(({ CoursePage }) => <CoursePage />),
+            element: () =>
+              import("./Pages/CoursesPage").then(({ CoursesPage }) => (
+                <CoursesPage />
+              )),
           },
-        ]
+        ],
+      },
+      {
+        path: ":id",
+        element: () =>
+          import("./Pages/CoursePage").then(({ CoursePage }) => <CoursePage />),
       },
     ],
   },

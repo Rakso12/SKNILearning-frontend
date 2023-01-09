@@ -27,11 +27,11 @@ function Paths() {
         return "An error has occured: " + error.message;
     }
 
-    const sortedPaths = [...data].sort((a, z) => { // sort jest metodą destruktywną, więc kopiujemy tablicę
+    const sortedPaths = [...data].sort((a, z) => {
         if (sortBy === "Newest") { 
-            return new Date(z.created_at).getTime() - new Date(a.created_at).getTime(); }// zakładając, że właściwość `createdAt` jest typu `string` parsowalnym przez konstruktor `Date`, np. ISO 8601
+            return new Date(z.created_at).getTime() - new Date(a.created_at).getTime(); }
         if (sortBy === "Rating") {
-            return z.rating - a.rating // zakładając, że właściowść `rating` jest liczbą
+            return z.rating - a.rating
         }
         return 0;
       });
@@ -68,12 +68,9 @@ function Paths() {
                                             switch (option.name) {
                                                 case 'Best Rating':
                                                     setSortType("Rating");
-                                                    console.log(sortedPaths);
-
                                                     break;
                                                 case 'Newest':
                                                     setSortType("Newest");
-                                                    console.log(sortedPaths);
                                                     break;
                                                 default:
                                                     break;

@@ -46,12 +46,14 @@ function Signin() {
       const error = (data && data.message) || response.status;
       setError('password', {
         type: "server",
-        message: data.message, //Email or password is wrong <- message from backend should be
+        message: data.message,
       })
-      return;
     }
-    console.log('Login success = ', response);
+
     queryClient.setQueryData(["userInfo"], () => data.user);
+    
+    await queryClient.refetchQueries();
+    
     navigate({ replace: true, to: "/" });
   };
 
